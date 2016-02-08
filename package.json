@@ -1,0 +1,33 @@
+{
+  "name": "markov-chain-mecab",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "dependencies": {
+    "mecab-async": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.5.1",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "jsx-loader": "^0.13.2",
+    "npm-watch": "^0.1.1",
+    "webpack": "^1.12.13"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js"
+    }
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib",
+    "markov": "node lib/test.js",
+    "watch": "npm-watch"
+  },
+  "author": "Masato Urai",
+  "license": "MIT"
+}
