@@ -12,7 +12,7 @@ const markov = new MarkovChainMecab(TEXT,SENTENCE_COUNT);
 
 Options|Descritption
 ---|---
-TEXT| Inout text you want to sumarize.
+TEXT| Input text you want to sumarize.
 SENTENCE_COUNT| Output sentence count
 
 ## Sample
