@@ -18,7 +18,7 @@ SENTENCE_COUNT| Output sentence count
 ## Sample
 ```
 import fs from 'fs';
-const MarkovChainMecab = require('./index.js');
+const MarkovChainMecab = require('markov-chain-mecab');
 const markov = new MarkovChainMecab(fs.readFileSync('sample.txt', 'utf8'), 5);
 
 console.log(markov);
