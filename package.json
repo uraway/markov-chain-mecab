@@ -1,10 +1,20 @@
 {
   "name": "markov-chain-mecab",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "lib/index.js",
   "dependencies": {
     "mecab-async": "^0.1.0"
+  },
+  "homepage": {
+    "url": "https://github.com/uraway/markov-chain-mecab"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/uraway/markov-chain-mecab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uraway/markov-chain-mecab/issues"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
