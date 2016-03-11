@@ -3,23 +3,12 @@
 npm install markov-chain-mecab
 ```
 
-## Usage
-
-```
-const MarkovChainMecab = require('markov-chain-mecab');
-const markov = new MarkovChainMecab(TEXT,SENTENCE_COUNT);
-```
-
-Options|Descritption
----|---
-TEXT| Input text you want to sumarize.
-SENTENCE_COUNT| Output sentence count
-
 ## Sample
 ```
-import fs from 'fs';
-const MarkovChainMecab = require('markov-chain-mecab');
-const markov = new MarkovChainMecab(fs.readFileSync('sample.txt', 'utf8'), 5);
+var fs = require('fs');
+var MarkovChain = require('../lib/index');
 
-console.log(markov);
+var markov = new MarkovChain(fs.readFileSync('sample.txt', 'utf-8'));
+
+console.log(markov.start(5));
 ```

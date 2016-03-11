@@ -4,17 +4,19 @@ var mecab = new Mecab();
 class MarkovChain {
   constructor(text) {
     this.text = text;
-
+    this.result = null;
     this.dictionary = {};
-    this.output = '';
+    this.output = 'output';
   }
 
   start(sentence) {
-    mecab.parse(this.text, (err, items) => {
-      let dic = this.makeDic(items);
-      this.makeSentence(dic, sentence);
-      console.log(this.output);
+    mecab.parse(this.text, (err, result) => {
+      this.dictionary = this.makeDic(result);
+      this.makeSentence(this.dictionary, sentence);
+
+      return this.output;
     });
+    return this.output;
   }
 
   makeDic(items) {
