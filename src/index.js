@@ -9,14 +9,17 @@ class MarkovChain {
     this.output = 'output';
   }
 
-  start(sentence) {
+  start(sentence, callback) {
+    this.parse(sentence, callback);
+  }
+
+  parse(sentence, callback) {
     mecab.parse(this.text, (err, result) => {
       this.dictionary = this.makeDic(result);
       this.makeSentence(this.dictionary, sentence);
 
-      return this.output;
+      callback(this.output);
     });
-    return this.output;
   }
 
   makeDic(items) {
