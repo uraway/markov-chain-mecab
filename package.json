@@ -18,13 +18,9 @@
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
-    "babel-loader": "^6.2.2",
     "babel-preset-es2015": "^6.5.0",
-    "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
-    "jsx-loader": "^0.13.2",
-    "npm-watch": "^0.1.1",
-    "webpack": "^1.12.13"
+    "npm-watch": "^0.1.1"
   },
   "watch": {
     "build": {
@@ -35,8 +31,8 @@
     }
   },
   "scripts": {
+    "start": "node example/test.js",
     "build": "babel src --out-dir lib",
-    "markov": "node lib/test.js",
     "watch": "npm-watch"
   },
   "author": "Masato Urai",

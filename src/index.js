@@ -1,15 +1,19 @@
 var Mecab = require('mecab-async');
 var mecab = new Mecab();
 
-class MarkovChainMecab {
-  constructor(text, SENTENCE_COUNT) {
-    this.parse(text, SENTENCE_COUNT);
+class MarkovChain {
+  constructor(text) {
+    this.text = text;
+
+    this.dictionary = {};
+    this.output = '';
   }
 
-  parse(text, SENTENCE_COUNT) {
-    mecab.parse(text, (err, items) => {
+  start(sentence) {
+    mecab.parse(this.text, (err, items) => {
       let dic = this.makeDic(items);
-      this.makeSentence(dic, SENTENCE_COUNT);
+      this.makeSentence(dic, sentence);
+      console.log(this.output);
     });
   }
 
@@ -20,11 +24,14 @@ class MarkovChainMecab {
       let t = items[i];
       let word = t[0];
       word = word.replace(/\s*/, '');
+
       if (word == '' || word == 'EOS') continue;
       tmp.push(word);
       if (tmp.length < 3) continue;
       if (tmp.length > 3) tmp.splice(0, 1);
+
       this.setWord3(dic, tmp);
+
       if (word == '。') {
         tmp = ['@'];
         continue;
@@ -35,32 +42,33 @@ class MarkovChainMecab {
   }
 
   setWord3(p, s3) {
-    var w1 = s3[0];
-    var w2 = s3[1];
-    var w3 = s3[2];
+    let w1 = s3[0];
+    let w2 = s3[1];
+    let w3 = s3[2];
     if (p[w1] == undefined) p[w1] = {};
     if (p[w1][w2] == undefined) p[w1][w2] = {};
     if (p[w1][w2][w3] == undefined) p[w1][w2][w3] = 0;
     p[w1][w2][w3]++;
   }
 
-  makeSentence(dic, SENTENCE_COUNT) {
-    for (var i = 0; i < SENTENCE_COUNT; i++) {
-      var ret = [];
-      var top = dic['@'];
+  makeSentence(dic, sentence) {
+    for (var i = 0; i < sentence; i++) {
+      let ret = [];
+      let top = dic['@'];
       if (!top) continue;
-      var w1 = this.choiceWord(top);
-      var w2 = this.choiceWord(top[w1]);
+      let w1 = this.choiceWord(top);
+      let w2 = this.choiceWord(top[w1]);
       ret.push(w1);
       ret.push(w2);
       for (;;) {
-        var w3 = this.choiceWord(dic[w1][w2]);
+        let w3 = this.choiceWord(dic[w1][w2]);
         ret.push(w3);
         if (w3 == '。') break;
         w1 = w2, w2 = w3;
       }
 
-      console.log(ret.join(''));
+      this.output = ret.join('');
+      return this.output;
     }
   }
 
@@ -84,4 +92,4 @@ class MarkovChainMecab {
   }
 }
 
-module.exports = MarkovChainMecab;
+module.exports = MarkovChain;
